@@ -30,7 +30,7 @@ const signatureBlends = [
 
 export default function SignatureCollection() {
   return (
-    <section className="w-full bg-[#ffffff] text-black py-24 sm:py-32 px-6 sm:px-10 lg:px-16 border-b border-neutral-300 overflow-hidden">
+    <section className="w-full bg-[#ffffff] text-black py-24 sm:py-32 px-6 sm:px-10 lg:px-16 overflow-hidden">
       <div className="max-w-7xl mx-auto space-y-32">
         {/* =========================================================================
             SECTION 1: SIGNATURE BLEND HEADER (FROM LEFT) + 3 DARK CARDS (FROM RIGHT)
@@ -164,7 +164,7 @@ export default function SignatureCollection() {
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative flex items-center justify-center"
           >
-            <div className="relative w-full max-w-md aspect-[4/3] sm:aspect-[1.2/1] border border-neutral-300 rounded-none p-8 sm:p-10 flex flex-col justify-center items-end bg-neutral-100/70 shadow-xl">
+            <div className="relative w-full max-w-md aspect-[4/3] sm:aspect-[1.2/1] rounded-none p-8 sm:p-10 flex flex-col justify-center items-end bg-neutral-100/70 shadow-xl">
               {/* Overlapping Bag Image */}
               <div className="absolute -left-6 sm:-left-12 top-1/2 -translate-y-1/2 w-[160px] sm:w-[220px] aspect-[2/3] drop-shadow-2xl">
                 <Image
@@ -224,20 +224,20 @@ export default function SignatureCollection() {
             transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
             className="lg:col-span-6 relative flex items-center justify-center order-2 lg:order-1"
           >
-            <div className="relative w-full max-w-md aspect-[4/3] sm:aspect-[1.2/1] bg-black text-white rounded-none p-8 sm:p-10 flex flex-col justify-center items-end shadow-2xl border border-neutral-800">
-              {/* Overlapping bag on the left */}
-              <div className="absolute -left-6 sm:-left-12 top-1/2 -translate-y-1/2 w-[160px] sm:w-[220px] aspect-[2/3] drop-shadow-2xl">
+            <div className="relative w-full max-w-md aspect-[4/3] sm:aspect-[1.2/1] bg-black text-white rounded-none p-8 sm:p-10 flex flex-col justify-center items-start shadow-2xl">
+              {/* Overlapping bag on the right */}
+              <div className="absolute -right-6 sm:-right-12 top-1/2 -translate-y-1/2 w-[160px] sm:w-[220px] aspect-[2/3] drop-shadow-2xl">
                 <Image
                   src="/coffee-bag.jpg"
                   alt="Medium Roast pouch"
                   fill
-                  className="object-contain filter grayscale contrast-125"
+                  className="object-contain filter contrast-125"
                   sizes="(max-width: 768px) 160px, 220px"
                 />
               </div>
 
               {/* Data Specifications inside dark card */}
-              <div className="w-[50%] sm:w-[55%] space-y-6 text-left pl-4">
+              <div className="w-[50%] sm:w-[55%] space-y-6 text-left pr-4">
                 <div>
                   <span className="text-[10px] tracking-widest uppercase text-neutral-400 font-semibold block mb-1 font-mono">
                     Flavor

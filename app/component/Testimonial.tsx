@@ -11,16 +11,16 @@ const testimonials = [
       'From planning to final delivery, everything was handled with clarity and precision. Their attention to detail and design quality really stood out.',
     author: 'Daniel Karim',
     role: 'Creative Director & Visual Storyteller',
-    portrait: '/testimonial-1.jpg',
-    pillQuote: 'Monochrome precision & high-calibre ergonomic finesse.',
+    portrait: '/testimonial1.jpg',
+    pillQuote: 'Chromatic precision & high-calibre ergonomic finesse.',
   },
   {
     id: 2,
     quote:
       'The optical fidelity and build quality completely exceeded my expectations. Having gear that feels tactile and responsive transforms the documentary workflow.',
     author: 'Marcus Vance',
-    role: 'Documentary Filmmaker',
-    portrait: '/testimonial-2.jpg',
+    role: 'Cinematographer & Filmmaker',
+    portrait: '/testimonial2.jpg',
     pillQuote: 'Built like an heirloom with modern optical sharpness.',
   },
   {
@@ -28,8 +28,8 @@ const testimonials = [
     quote:
       'Their minimalist approach to analog mechanics is genuinely inspiring. It is rare to find hardware where every knob and finish feels intentionally considered.',
     author: 'Elena Rostova',
-    role: 'Industrial Designer & Photographer',
-    portrait: '/testimonial-3.jpg',
+    role: 'Product Designer & Photographer',
+    portrait: '/testimonial3.jpg',
     pillQuote: 'Tactile perfection that inspires every single frame.',
   },
 ];
@@ -47,11 +47,8 @@ export default function Testimonial() {
   };
 
   return (
-    <section className="w-full bg-[#0a0a0c] py-24 sm:py-32 px-6 sm:px-10 lg:px-16 text-white border-b border-white/10 overflow-hidden relative">
-      {/* Background glow & subtle grain */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,_var(--tw-gradient-stops))] from-white/[0.04] via-transparent to-transparent pointer-events-none" />
-
-      <div className="max-w-5xl mx-auto relative z-10">
+    <section className="w-full bg-[#f2f2f3] py-12 sm:py-16 px-4 sm:px-6 lg:px-8 text-black overflow-hidden relative">
+      <div className="max-w-4xl mx-auto relative z-10">
         {/* =========================================================================
             TOP HEADER - ENTERS FROM LEFT
         ========================================================================= */}
@@ -60,31 +57,31 @@ export default function Testimonial() {
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="text-center mb-16 sm:mb-20"
+          className="text-center mb-8 sm:mb-10"
         >
-          <span className="text-[10px] font-mono tracking-[0.3em] uppercase text-neutral-400 bg-white/5 border border-white/15 px-3 py-1 rounded-sm mb-4 inline-block">
+          <span className="text-[9px] font-mono tracking-[0.25em] uppercase text-neutral-500 bg-neutral-100 border border-neutral-300 px-2.5 py-0.5 rounded-sm mb-2.5 inline-block">
             TESTIMONIALS & VOICES
           </span>
-          <h2 className="text-3xl sm:text-5xl lg:text-6xl font-sans tracking-tight text-white font-light leading-[1.15] max-w-2xl mx-auto">
-            Why <strong className="font-bold text-white">Pixel Store</strong> Feels <strong className="font-bold underline decoration-1 underline-offset-8 decoration-white/40">Human</strong>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-sans tracking-tight text-black font-light leading-snug max-w-xl mx-auto">
+            Why <strong className="font-bold text-black">Pixel Store</strong> Feels <strong className="font-bold underline decoration-1 underline-offset-4 decoration-neutral-400">Human</strong>
           </h2>
         </motion.div>
 
         {/* =========================================================================
-            MAIN TESTIMONIAL CARD CONTAINER - ENTERS FROM RIGHT
+            MAIN TESTIMONIAL CARD CONTAINER
         ========================================================================= */}
         <motion.div
           initial={{ x: 80, opacity: 0 }}
           whileInView={{ x: 0, opacity: 1 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.85, ease: [0.16, 1, 0.3, 1] }}
-          className="bg-black border border-white/15 p-8 sm:p-14 shadow-2xl relative"
+          className="p-3 sm:p-6 relative rounded-sm"
         >
           {/* Card Body: Left Portrait + Right Testimonial Quote */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-5 lg:gap-6 items-stretch">
             {/* Left Column: Portrait with Floating Caption Box */}
-            <div className="lg:col-span-5 relative flex flex-col justify-end">
-              <div className="relative aspect-square w-full overflow-hidden bg-neutral-900 border border-white/10 shadow-lg">
+            <div className="md:col-span-5 relative flex flex-col justify-end">
+              <div className="relative aspect-[4/3] md:aspect-square w-full max-h-[280px] overflow-hidden bg-neutral-200 border border-neutral-300 shadow-sm">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={current.id}
@@ -98,8 +95,8 @@ export default function Testimonial() {
                       src={current.portrait}
                       alt={current.author}
                       fill
-                      className="object-cover filter grayscale contrast-125"
-                      sizes="(max-width: 1024px) 100vw, 400px"
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 320px"
                       priority
                     />
                   </motion.div>
@@ -107,25 +104,25 @@ export default function Testimonial() {
               </div>
 
               {/* Floating Highlight Pill box on bottom-left of photo */}
-              <div className="absolute -bottom-3 left-3 right-3 sm:right-6 bg-white text-black p-3.5 shadow-2xl border border-neutral-300">
-                <p className="text-[11px] font-mono uppercase tracking-wider font-bold leading-snug">
+              <div className="absolute -bottom-2.5 left-2 right-2 sm:right-4 bg-black text-white p-2.5 shadow-lg border border-black">
+                <p className="text-[10px] font-mono uppercase tracking-wider font-bold leading-tight">
                   {current.pillQuote}
                 </p>
               </div>
             </div>
 
             {/* Right Column: Quote + Author info + Navigation controls */}
-            <div className="lg:col-span-7 bg-neutral-950 border border-white/10 p-8 sm:p-10 flex flex-col justify-between">
+            <div className="md:col-span-7 bg-[#0f1013] border border-black p-5 sm:p-6 flex flex-col justify-between shadow-inner">
               {/* Quote Body with animated switch */}
-              <div className="pt-2">
+              <div className="pt-1">
                 <AnimatePresence mode="wait">
                   <motion.p
                     key={current.id}
-                    initial={{ opacity: 0, y: 10 }}
+                    initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    transition={{ duration: 0.35 }}
-                    className="text-neutral-200 text-base sm:text-lg leading-relaxed font-light italic"
+                    exit={{ opacity: 0, y: -8 }}
+                    transition={{ duration: 0.3 }}
+                    className="text-neutral-200 text-sm sm:text-base leading-relaxed font-light italic"
                   >
                     “{current.quote}”
                   </motion.p>
@@ -133,25 +130,25 @@ export default function Testimonial() {
               </div>
 
               {/* Author Info + Slider arrows row */}
-              <div className="mt-8 pt-6 border-t border-white/10 flex items-end justify-between gap-4">
+              <div className="mt-5 pt-4 border-t border-white/10 flex items-end justify-between gap-3">
                 <div>
-                  <h4 className="text-sm font-bold text-white tracking-wide">
+                  <h4 className="text-xs sm:text-sm font-bold text-white tracking-wide">
                     {current.author}
                   </h4>
-                  <p className="text-xs text-neutral-400 font-mono font-light mt-0.5">
+                  <p className="text-[11px] text-neutral-400 font-mono font-light mt-0.5">
                     {current.role}
                   </p>
                 </div>
 
                 {/* Arrow Controls (< >) */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     onClick={handlePrev}
                     aria-label="Previous testimonial"
-                    className="w-10 h-10 bg-neutral-900 border border-white/20 hover:bg-white hover:text-black flex items-center justify-center text-white transition-all cursor-pointer shadow-md"
+                    className="w-8 h-8 bg-neutral-900 border border-white/20 hover:bg-white hover:text-black flex items-center justify-center text-white transition-all cursor-pointer shadow-sm"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
                     </svg>
                   </button>
@@ -159,9 +156,9 @@ export default function Testimonial() {
                     type="button"
                     onClick={handleNext}
                     aria-label="Next testimonial"
-                    className="w-10 h-10 bg-neutral-900 border border-white/20 hover:bg-white hover:text-black flex items-center justify-center text-white transition-all cursor-pointer shadow-md"
+                    className="w-8 h-8 bg-neutral-900 border border-white/20 hover:bg-white hover:text-black flex items-center justify-center text-white transition-all cursor-pointer shadow-sm"
                   >
-                    <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                    <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
                     </svg>
                   </button>
@@ -171,7 +168,7 @@ export default function Testimonial() {
           </div>
 
           {/* Bottom Thumbnail Selector Row */}
-          <div className="flex items-center justify-center gap-3 mt-8 pt-6">
+          <div className="flex items-center justify-center gap-2.5 mt-5 pt-3">
             {testimonials.map((item, index) => {
               const isSelected = index === activeIndex;
               return (
@@ -179,9 +176,9 @@ export default function Testimonial() {
                   key={item.id}
                   type="button"
                   onClick={() => setActiveIndex(index)}
-                  className={`relative w-12 h-12 overflow-hidden transition-all duration-200 cursor-pointer border ${isSelected
-                    ? 'border-white scale-110 shadow-lg opacity-100 ring-1 ring-white'
-                    : 'border-white/20 opacity-40 hover:opacity-80'
+                  className={`relative w-9 h-9 overflow-hidden transition-all duration-200 cursor-pointer border ${isSelected
+                    ? 'border-black scale-105 shadow-md opacity-100 ring-1.5 ring-black'
+                    : 'border-neutral-300 opacity-60 hover:opacity-100'
                     }`}
                   aria-label={`Select testimonial by ${item.author}`}
                 >
@@ -189,7 +186,7 @@ export default function Testimonial() {
                     src={item.portrait}
                     alt={item.author}
                     fill
-                    className="object-cover filter grayscale contrast-125"
+                    className="object-cover"
                   />
                 </button>
               );
