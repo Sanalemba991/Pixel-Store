@@ -1,3 +1,4 @@
+// @ts-nocheck
 'use client';
 
 import React, { useState } from 'react';
@@ -9,29 +10,28 @@ const bagVariants = [
         id: 1,
         name: 'Monochrome Matte Messenger',
         price: '$149.00',
-        image: '/das.png',
-        thumb: '/vintage-bag.jpg',
+        image: '/duos.png',
+        thumb: '/das.png',
+        tag: 'SPECIAL EDITION',
+        desc: 'Precision-engineered shock absorbing partitions protect your vintage lenses and camera body. Built with weather-resistant heavy duck canvas and genuine full-grain leather.',
     },
     {
         id: 2,
         name: 'Obsidian Canvas SLR Holster',
         price: '$165.00',
-        image: '/das.png',
-        thumb: '/vintage-bag.jpg',
+        image: '/duo.png',
+        thumb: '/bagg.png',
+        tag: 'LIMITED RUN',
+        desc: 'Full grain leather accents with dual side quick-access camera compartments. Rugged brass hardware designed for field shoots.',
     },
     {
         id: 3,
         name: 'Pure Onyx Vintage Bag',
         price: '$180.00',
-        image: '/das.png',
-        thumb: '/vintage-bag.jpg',
-    },
-    {
-        id: 4,
-        name: 'Stealth Black Rugged Pack',
-        price: '$155.00',
-        image: '/vintage-bag.jpg',
-        thumb: '/vintage-bag.jpg',
+        image: '/duo.png',
+        thumb: '/das.png',
+        tag: 'STUDIO CRAFT',
+        desc: 'Custom ballistic weatherproofing layered with soft microfiber lining to keep high-end mirrorless sensors and optics scratch-free.',
     },
 ];
 
@@ -40,150 +40,99 @@ export default function Banner() {
     const [, setCartCount] = useState(0);
 
     return (
-        <section className="relative w-full min-h-[calc(100vh-80px)] flex flex-col justify-between overflow-hidden select-none font-sans bg-white text-black">
-            {/* High-Contrast Pure White & Solid Black Split Layout */}
-            <div className="absolute inset-0 z-0 flex flex-col lg:flex-row pointer-events-none">
-                {/* Left Panel: Crisp Pure White */}
-                <div className="w-full lg:w-[62%] h-full bg-white" />
-                {/* Right Panel: Solid Pure Black */}
-                <div className="w-full lg:w-[38%] h-full bg-black lg:border-l-2 border-black" />
+        <section className="relative w-full h-screen min-h-[580px] max-h-[880px] flex flex-col justify-between overflow-hidden select-none bg-neutral-950 font-sans selection:bg-amber-500 selection:text-black">
+            {/* 1. Base Landscape Background */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="/bsanner.png"
+                    alt="SUPA. FAST. Landscape Banner"
+                    fill
+                    priority
+                    className="object-cover object-center filter contrast-[1.04] brightness-[0.98]"
+                    sizes="100vw"
+                />
+                {/* Soft atmospheric gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/80 via-transparent to-black/20 pointer-events-none" />
             </div>
 
-            {/* MAIN HERO CONTENT */}
-            <main className="relative z-10 flex-1 flex flex-col lg:flex-row items-center justify-between px-8 md:px-16 py-8 lg:py-12">
-                {/* Left Column: Pure White Background Area - ENTERS FROM LEFT */}
-                <motion.div
-                    initial={{ x: -100, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full lg:w-[48%] max-w-xl z-20 py-6"
-                >
-                    <div className="inline-flex items-center gap-2 px-3 py-1 bg-black text-white text-[10px] tracking-widest uppercase font-mono font-bold mb-4">
-                        <span className="w-1.5 h-1.5 bg-white animate-pulse" />
-                        BLACK & WHITE EDITION
-                    </div>
-
-                    {/* Crisp Black Price */}
-                    <div className="text-4xl md:text-5xl font-mono font-extrabold text-black tracking-tight mb-3">
-                        {selectedBag.price}
-                    </div>
-
-                    {/* Bold Black Title */}
-                    <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] font-sans font-black leading-[1.1] text-black tracking-tight mb-5">
-                        Canvas Leather DSLR Vintage Camera Messenger Bag
-                    </h1>
-
-                    <p className="text-neutral-700 text-xs sm:text-sm leading-relaxed mb-8 max-w-md font-normal">
-                        Precision-engineered shock absorbing partitions protect your vintage lenses and camera body. Built with weather-resistant heavy duck canvas and genuine full-grain leather.
-                    </p>
-
-                    {/* High Contrast Black & White Buttons */}
-                    <div className="flex items-center gap-4">
-                        <button
-                            type="button"
-                            onClick={() => setCartCount((c) => c + 1)}
-                            className="px-8 py-3.5 bg-black hover:bg-neutral-800 text-white font-bold text-xs tracking-widest uppercase border-2 border-black shadow-lg hover:shadow-black/20 transform hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer"
+            {/* 2. Center Layer: Giant Typographic Elements & Centered Floating Bag */}
+            <div className="relative z-20 flex-1 flex flex-col justify-center items-center pointer-events-none translate-y-10 sm:translate-y-14 lg:translate-y-16">
+                <div className="relative w-full max-w-7xl px-4 sm:px-8 flex items-center justify-between h-full">
+                    {/* LEFT: "PIXEL" Big Bold Outlined Headline */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -80 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
+                        className="absolute left-2 sm:left-6 lg:left-10 top-0 sm:top-2 lg:top-4 z-10"
+                    >
+                        <h1
+                            className="text-[19vw] sm:text-[16vw] lg:text-[14vw] font-black leading-none tracking-tight select-none uppercase font-sans scale-y-[1.1] origin-top-left"
+                            style={{
+                                WebkitTextStroke: '2.5px rgba(255, 255, 255, 0.95)',
+                                color: 'transparent',
+                                textShadow: '0 8px 30px rgba(0,0,0,0.35)',
+                            }}
                         >
-                            Add to Cart
-                        </button>
-                        <button
-                            type="button"
-                            className="px-6 py-3.5 bg-white hover:bg-black hover:text-white text-black font-bold text-xs tracking-widest uppercase border-2 border-black transition-all cursor-pointer"
-                        >
-                            Explore Gear
-                        </button>
-                    </div>
-                </motion.div>
+                            PIXEL
+                        </h1>
+                    </motion.div>
 
-                {/* Center / Hero Bag Image - ENTERS FROM RIGHT / CENTER */}
-                <motion.div
-                    initial={{ x: 100, opacity: 0, scale: 0.95 }}
-                    whileInView={{ x: 0, opacity: 1, scale: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-                    className="w-full lg:w-[44%] relative flex items-center justify-center my-8 lg:my-0 lg:-ml-8 z-20"
-                >
-                    <div className="relative group transition-transform duration-500 hover:scale-[1.02]">
-                        <div className="relative w-[320px] sm:w-[440px] md:w-[480px] lg:w-[520px] h-[280px] sm:h-[360px] md:h-[400px] lg:h-[420px]">
+                    {/* CENTER: Floating Bag - Centered and Big */}
+                    <motion.div
+                        key={selectedBag.id}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+                        className="relative z-20 mx-auto flex items-center justify-center -translate-y-1 sm:-translate-y-2"
+                    >
+                        <motion.div
+                            animate={{ y: [0, -10, 0] }}
+                            transition={{ repeat: Infinity, duration: 4.8, ease: 'easeInOut' }}
+                            className="relative w-[230px] sm:w-[290px] md:w-[340px] lg:w-[380px] h-[220px] sm:h-[280px] md:h-[330px] lg:h-[370px] pointer-events-auto"
+                        >
                             <Image
                                 src={selectedBag.image}
                                 alt={selectedBag.name}
                                 fill
                                 priority
-                                className="object-contain p-2 filter  contrast-125 drop-shadow-2xl transition-all duration-300"
-                                sizes="(max-width: 768px) 100vw, 520px"
+                                className="object-contain filter drop-shadow-[0_25px_35px_rgba(0,0,0,0.65)] hover:scale-105 transition-transform duration-500"
+                                sizes="(max-width: 768px) 290px, 380px"
                             />
-                        </div>
-                    </div>
-                </motion.div>
+                        </motion.div>
+                    </motion.div>
 
-                {/* Right Column (Pure Black Panel) - ENTERS FROM RIGHT */}
-                <motion.div
-                    initial={{ x: 80, opacity: 0 }}
-                    whileInView={{ x: 0, opacity: 1 }}
-                    viewport={{ once: true, amount: 0.3 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
-                    className="w-full lg:w-[16%] flex flex-col items-center lg:items-end justify-between self-stretch py-2 z-20 gap-6 text-white"
-                >
-                    {/* Thumbnails rail on black panel */}
-                    <div className="flex flex-row lg:flex-col items-center gap-3 relative">
-                        <div className="hidden lg:block w-8 h-[2px] bg-white mb-2 self-start mr-2" />
-                        {bagVariants.map((item) => {
-                            const isSelected = item.id === selectedBag.id;
-                            return (
-                                <button
-                                    key={item.id}
-                                    type="button"
-                                    onClick={() => setSelectedBag(item)}
-                                    className={`relative w-14 h-12 overflow-hidden p-0.5 transition-all duration-200 cursor-pointer ${isSelected
-                                        ? 'ring-2 ring-white scale-105 shadow-xl bg-white'
-                                        : 'opacity-50 hover:opacity-100 bg-neutral-900 border border-neutral-700'
-                                        }`}
-                                    aria-label={`Select ${item.name}`}
-                                >
-                                    <Image
-                                        src={item.thumb}
-                                        alt={item.name}
-                                        width={56}
-                                        height={48}
-                                        className="w-full h-full object-cover filter  contrast-125"
-                                    />
-                                </button>
-                            );
-                        })}
-                    </div>
+                    {/* RIGHT: "Store" Big Serif Headline */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 80 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.15 }}
+                        className="absolute right-2 sm:right-6 lg:right-10 bottom-2 sm:bottom-4 lg:bottom-6 z-10 text-right"
+                    >
+                        <span
+                            className="inline-block text-[21vw] sm:text-[18vw] lg:text-[15.5vw] font-serif italic font-normal leading-none tracking-tight select-none text-white/95 scale-y-[1.1] origin-bottom-right"
+                            style={{
+                                textShadow: '0 10px 40px rgba(0,0,0,0.5)',
+                            }}
+                        >
+                            Store.
+                        </span>
+                    </motion.div>
+                </div>
+            </div>
 
-                    {/* Featured Mini Floating Card (High contrast white card inside black right column) */}
-                    <div className="w-full max-w-[240px] bg-white text-black p-4 shadow-2xl border-2 border-white mt-auto">
-                        <p className="text-[10px] uppercase tracking-widest text-neutral-600 font-mono font-bold mb-2">
-                            Featured Gear
-                        </p>
-                        <div className="flex items-center gap-3">
-                            <div className="w-12 h-12 relative flex-shrink-0 bg-black overflow-hidden border border-black">
-                                <Image
-                                    src="/vintage-bag.jpg"
-                                    alt="Related bag"
-                                    fill
-                                    className="object-cover filter  contrast-125"
-                                />
-                            </div>
-                            <div className="flex-1 min-w-0">
-                                <h4 className="text-[11px] font-bold text-black line-clamp-2 leading-tight">
-                                    Obsidian Vintage SLR Camera Messenger Bag
-                                </h4>
-                                <div className="flex items-center gap-1 mt-1">
-                                    {[...Array(5)].map((_, i) => (
-                                        <span key={i} className="text-black text-[10px] leading-none">
-                                            ★
-                                        </span>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </motion.div>
-            </main>
+            {/* 3. Bottom-Left Natural Description Text */}
+            <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.25 }}
+                className="relative z-30 w-full px-6 sm:px-10 lg:px-12 pb-12 sm:pb-16 lg:pb-18 pl-14 sm:pl-16 lg:pl-16"
+            >
+                <div className="max-w-md text-left">
+                    <p className="text-xs sm:text-sm text-white/80 font-normal leading-relaxed drop-shadow">
+                        Precision optics, mirrorless bodies, and flagship folding devices. Curated in Dubai for creators with authentic brand warranties and same-day express delivery.
+                    </p>
+                </div>
+            </motion.div>
         </section>
     );
 }

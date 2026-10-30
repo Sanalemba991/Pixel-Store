@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 
 interface NavbarProps {
@@ -9,9 +10,9 @@ interface NavbarProps {
 }
 
 export default function Navbar({ cartCount = 0 }: NavbarProps) {
+    const pathname = usePathname();
     const [isScrolled, setIsScrolled] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const [activeLink, setActiveLink] = useState('Home');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,24 +24,35 @@ export default function Navbar({ cartCount = 0 }: NavbarProps) {
 
     const navLinks = [
         { name: 'Home', href: '/' },
-        { name: 'Products', href: '#products', badge: 'New' },
-        { name: 'About', href: 'about' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'Products', href: '/#products', badge: 'New' },
+        { name: 'About', href: '/about' },
+        { name: 'Contact', href: '/contact' },
     ];
+
+    const isLinkActive = (href: string) => {
+        if (href === '/') {
+            return pathname === '/';
+        }
+        if (href.startsWith('/#')) {
+            return false;
+        }
+        return pathname.startsWith(href);
+    };
 
     return (
         <motion.header
             initial={{ y: -60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className={`sticky top-0 z-50 w-full transition-all duration-300 ${isScrolled
-                ? 'bg-black/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
-                : 'bg-black/60 backdrop-blur-xs py-4 border-b border-white/5'
-                }`}
+            className={`fixed top-0 left-0 right-0 z-50 w-full transition-all duration-300 flex justify-center ${
+                isScrolled
+                    ? 'bg-black/90 backdrop-blur-md border-b border-white/10 py-3 shadow-2xl'
+                    : 'bg-transparent py-4 border-b border-transparent'
+            }`}
         >
-            <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 flex items-center justify-between">
-                {/* Brand Logo */}
-                <Link href="/" className="flex items-center gap-3 group">
+            <div className="w-full max-w-7xl px-6 sm:px-8 lg:px-12 flex items-center justify-between relative">
+                {/* Brand Logo - ALWAYS VISIBLE */}
+                <Link href="/" className="flex items-center gap-3 group z-10">
                     <div className="w-10 h-10 rounded-xl bg-white text-black flex items-center justify-center font-bold shadow-md group-hover:scale-105 transition-all duration-200 border border-white/20">
                         <svg
                             className="w-5 h-5 text-black"
@@ -67,33 +79,39 @@ export default function Navbar({ cartCount = 0 }: NavbarProps) {
                     </div>
                 </Link>
 
-                {/* Desktop Navigation Links */}
-                <nav className="hidden md:flex items-center gap-1 bg-white/5 backdrop-blur-md px-4 py-1.5 rounded-full border border-white/10 shadow-inner">
-                    {navLinks.map((link) => {
-                        const isActive = activeLink === link.name;
-                        return (
-                            <a
-                                key={link.name}
-                                href={link.href}
-                                onClick={() => setActiveLink(link.name)}
-                                className={`relative px-4 py-1.5 text-xs font-medium tracking-wider uppercase transition-all duration-200 rounded-full flex items-center gap-1.5 ${isActive
-                                    ? 'text-black bg-white shadow-md font-semibold'
-                                    : 'text-neutral-300 hover:text-white hover:bg-white/10'
+                {/* Navigation Capsule Pill (Centered floating capsule) */}
+                <div className="absolute left-1/2 -translate-x-1/2 hidden md:block">
+                    <nav className="flex items-center gap-1 bg-black/80 backdrop-blur-xl px-2 sm:px-3 py-1.5 rounded-full border border-white/15 shadow-2xl">
+                        {navLinks.map((link) => {
+                            const isActive = isLinkActive(link.href);
+                            return (
+                                <Link
+                                    key={link.name}
+                                    href={link.href}
+                                    className={`relative px-4 sm:px-5 py-2 text-xs font-bold tracking-wider uppercase transition-all duration-300 rounded-full flex items-center gap-1.5 ${
+                                        isActive
+                                            ? 'text-black bg-white shadow-lg'
+                                            : 'text-neutral-300 hover:text-white hover:bg-white/10'
                                     }`}
-                            >
-                                {link.name}
-                                {link.badge && (
-                                    <span className={`text-[9px] px-1.5 py-0.2 rounded-full font-bold uppercase tracking-tight ${isActive ? 'bg-black text-white' : 'bg-white text-black'}`}>
-                                        {link.badge}
-                                    </span>
-                                )}
-                            </a>
-                        );
-                    })}
-                </nav>
+                                >
+                                    {link.name}
+                                    {link.badge && (
+                                        <span
+                                            className={`text-[9px] px-1.5 py-0.5 rounded-full font-bold uppercase tracking-tight ${
+                                                isActive ? 'bg-black text-white' : 'bg-white text-black'
+                                            }`}
+                                        >
+                                            {link.badge}
+                                        </span>
+                                    )}
+                                </Link>
+                            );
+                        })}
+                    </nav>
+                </div>
 
-                {/* Right Action Icons: Search, Cart, User Profile */}
-                <div className="flex items-center gap-3 sm:gap-4">
+                {/* Right Action Icons: Search Icon (Always visible) */}
+                <div className="flex items-center gap-3 sm:gap-4 z-10">
                     <button
                         type="button"
                         aria-label="Search items"
@@ -105,6 +123,7 @@ export default function Navbar({ cartCount = 0 }: NavbarProps) {
                         </svg>
                     </button>
 
+                    {/* Mobile Hamburger Button */}
                     <button
                         type="button"
                         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -112,16 +131,19 @@ export default function Navbar({ cartCount = 0 }: NavbarProps) {
                         aria-label="Toggle mobile menu"
                     >
                         <span
-                            className={`h-0.5 w-5 bg-white rounded-full transition-transform ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''
-                                }`}
+                            className={`h-0.5 w-5 bg-white rounded-full transition-transform ${
+                                mobileMenuOpen ? 'rotate-45 translate-y-2' : ''
+                            }`}
                         />
                         <span
-                            className={`h-0.5 w-4 bg-white rounded-full transition-opacity ${mobileMenuOpen ? 'opacity-0' : ''
-                                }`}
+                            className={`h-0.5 w-4 bg-white rounded-full transition-opacity ${
+                                mobileMenuOpen ? 'opacity-0' : ''
+                            }`}
                         />
                         <span
-                            className={`h-0.5 w-5 bg-white rounded-full transition-transform ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
-                                }`}
+                            className={`h-0.5 w-5 bg-white rounded-full transition-transform ${
+                                mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''
+                            }`}
                         />
                     </button>
                 </div>
@@ -130,24 +152,30 @@ export default function Navbar({ cartCount = 0 }: NavbarProps) {
             {/* Mobile Dropdown Menu */}
             {mobileMenuOpen && (
                 <div className="md:hidden mt-3 px-6 py-4 bg-black/95 backdrop-blur-xl border-b border-white/10 flex flex-col gap-3 shadow-2xl">
-                    {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            onClick={() => {
-                                setActiveLink(link.name);
-                                setMobileMenuOpen(false);
-                            }}
-                            className="flex items-center justify-between py-2 text-sm font-medium tracking-wider uppercase text-neutral-300 hover:text-white border-b border-white/5"
-                        >
-                            <span>{link.name}</span>
-                            {link.badge && (
-                                <span className="text-[10px] px-2 py-0.5 rounded-full bg-white text-black font-semibold">
-                                    {link.badge}
-                                </span>
-                            )}
-                        </a>
-                    ))}
+                    {navLinks.map((link) => {
+                        const isActive = isLinkActive(link.href);
+                        return (
+                            <Link
+                                key={link.name}
+                                href={link.href}
+                                onClick={() => setMobileMenuOpen(false)}
+                                className={`flex items-center justify-between py-2 text-sm font-medium tracking-wider uppercase border-b border-white/5 transition-colors ${
+                                    isActive ? 'text-white font-bold' : 'text-neutral-300 hover:text-white'
+                                }`}
+                            >
+                                <span>{link.name}</span>
+                                {link.badge && (
+                                    <span
+                                        className={`text-[10px] px-2 py-0.5 rounded-full font-semibold ${
+                                            isActive ? 'bg-white text-black' : 'bg-neutral-800 text-neutral-300'
+                                        }`}
+                                    >
+                                        {link.badge}
+                                    </span>
+                                )}
+                            </Link>
+                        );
+                    })}
                     <div className="pt-2 flex items-center justify-between text-neutral-400 text-xs">
                         <span>Black & White Series</span>
                         <span className="text-white font-medium">Explore →</span>
