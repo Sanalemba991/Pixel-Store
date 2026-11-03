@@ -40,7 +40,7 @@ export default function Banner() {
     const [, setCartCount] = useState(0);
 
     return (
-        <section className="relative w-full h-screen min-h-[580px] max-h-[880px] flex flex-col justify-between overflow-hidden select-none bg-neutral-950 font-sans selection:bg-amber-500 selection:text-black">
+        <section className="relative w-full h-[620px] sm:h-[700px] md:h-screen md:min-h-[580px] md:max-h-[880px] flex flex-col justify-between overflow-hidden select-none bg-neutral-950 font-sans selection:bg-amber-500 selection:text-black">
             {/* 1. Base Landscape Background */}
             <div className="absolute inset-0 z-0">
                 <Image

@@ -65,17 +65,22 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3.5 text-xs sm:text-[13px] text-neutral-400 font-light">
               <li>
-                <Link href="#about" className="hover:text-white transition-colors">
-                  About
+                <Link href="/" className="hover:text-white transition-colors">
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="#products" className="hover:text-white transition-colors">
-                  Products
+                <Link href="/products" className="hover:text-white transition-colors">
+                  All Products
                 </Link>
               </li>
               <li>
-                <Link href="#contact" className="hover:text-white transition-colors">
+                <Link href="/about" className="hover:text-white transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition-colors">
                   Contact
                 </Link>
               </li>
@@ -91,32 +96,27 @@ export default function Footer() {
             className="lg:col-span-2"
           >
             <h4 className="text-sm font-mono tracking-widest uppercase text-white mb-5 font-bold">
-              Collection
+              Categories
             </h4>
             <ul className="space-y-3.5 text-xs sm:text-[13px] text-neutral-400 font-light">
               <li>
-                <Link href="#leica" className="hover:text-white transition-colors">
-                  Leica Noir
+                <Link href="/products/cameras" className="hover:text-white transition-colors">
+                  Cameras
                 </Link>
               </li>
               <li>
-                <Link href="#canon" className="hover:text-white transition-colors">
-                  Canon
+                <Link href="/products/lenses" className="hover:text-white transition-colors">
+                  Lenses & Optics
                 </Link>
               </li>
               <li>
-                <Link href="#sony" className="hover:text-white transition-colors">
-                  Sony Alpha
+                <Link href="/products/power-accessories" className="hover:text-white transition-colors">
+                  Power & Accessories
                 </Link>
               </li>
               <li>
-                <Link href="#nikon" className="hover:text-white transition-colors">
-                  Nikon Z
-                </Link>
-              </li>
-              <li>
-                <Link href="#lenses" className="hover:text-white transition-colors">
-                  Prime Optics
+                <Link href="/products/roast-blends" className="hover:text-white transition-colors">
+                  Studio Roast Blends
                 </Link>
               </li>
             </ul>
